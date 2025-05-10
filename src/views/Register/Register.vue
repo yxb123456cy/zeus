@@ -49,8 +49,12 @@ const rules: FormRules = {
   confirmPassword: [
     { required: true, message: '请确认密码', trigger: 'blur' },
     {
-      validator: (_, value) => {
-        return value === form.password ? Promise.resolve() : Promise.reject('两次密码不一致')
+      validator(_, value, callback) {
+        if (value === form.password) {
+          callback() // 校验通过
+        } else {
+          callback(new Error('两次密码不一致'))
+        }
       },
       trigger: 'blur',
     },
