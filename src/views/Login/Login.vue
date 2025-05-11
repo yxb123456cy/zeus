@@ -13,6 +13,28 @@
           </div>
 
           <h2 class="login-title">欢迎登录</h2>
+          <div style="display: flex; justify-content: left;align-items: center">
+            <el-tag>请选择一个用户:</el-tag>
+            <el-select
+                v-model="value"
+                placeholder="选择用户"
+                size="default"
+                style="width: 150px;margin-left: 1.5vw"
+            >
+              <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+              />
+            </el-select>
+            <span style="display: flex; justify-content: center;align-items: center;margin-left: 1.5vw">
+              <el-avatar :src="user_avatar"/>
+              <el-tag type="success" style="margin-left: 0.5vw">{{ user_name }}</el-tag>
+            </span>
+          </div>
+
+          <!-- 模拟用户快捷登录 -->
           <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
             <el-form-item label="用户名" prop="username">
               <el-input v-model="form.username" placeholder="请输入用户名"/>
@@ -41,12 +63,56 @@ import {onMounted, reactive, ref} from 'vue'
 import {ElMessage, type FormInstance, type FormRules} from 'element-plus'
 import {useRouter} from 'vue-router'
 import {PROJECT_NAME} from "../../config";
+import {initialEmployees} from "../../mock/initialEmployees.ts";
+import {useUserStateStore} from "../../stores/userState.ts";
 
+const UserStateStore = useUserStateStore();
+const user_avatar = ref<string>("https://qy-red-book.oss-cn-guangzhou.aliyuncs.com/resources/avatar/67700cbb11c98ab3f5837115.jpg");
+const user_name = ref<string>("admin");
+const options_index = ref<number>(0);
+const value = ref('admin')
+watchEffect(() => {
+  if (value.value === 'admin') {
+    user_avatar.value = initialEmployees[0].baseInfo.avatar ? initialEmployees[0].baseInfo.avatar : "";
+    user_name.value = initialEmployees[0].baseInfo.username;
+    form.username = initialEmployees[0].baseInfo.username;
+    form.password = initialEmployees[0].baseInfo.password;
+    options_index.value = 0;
+  }
+  if (value.value === 'dev_leader') {
+    options_index.value = 1;
+    user_avatar.value = initialEmployees[1].baseInfo.avatar ? initialEmployees[1].baseInfo.avatar : "";
+    user_name.value = initialEmployees[1].baseInfo.username;
+    form.username = initialEmployees[1].baseInfo.username;
+    form.password = initialEmployees[1].baseInfo.password;
+  }
+  if (value.value === 'commonEmployee') {
+    options_index.value = 2;
+    user_avatar.value = initialEmployees[2].baseInfo.avatar ? initialEmployees[2].baseInfo.avatar : "";
+    user_name.value = initialEmployees[2].baseInfo.username;
+    form.username = initialEmployees[2].baseInfo.username;
+    form.password = initialEmployees[2].baseInfo.password;
+  }
+})
+const options = [
+  {
+    value: 'admin',
+    label: '管理员',
+  },
+  {
+    value: 'dev_leader',
+    label: '研发部领导',
+  },
+  {
+    value: 'commonEmployee',
+    label: '普通员工',
+  },
+]
 const router = useRouter()
 const formRef = ref<FormInstance>()
 const form = reactive({
   username: 'admin',
-  password: '123456',
+  password: 'admin',
 })
 
 const rules: FormRules = {
@@ -58,10 +124,17 @@ const handleLogin = () => {
   formRef.value?.validate((valid) => {
     if (valid) {
       // 登录逻辑
-      if (form.username === 'admin' && form.password === '123456') {
+      if (form.username === initialEmployees[options_index.value]
+              .baseInfo.username
+          && form.password === initialEmployees[options_index.value]
+              .baseInfo.password) {
+        UserStateStore.currentUser = initialEmployees[options_index.value];
+        UserStateStore.setLoginState(true);
         console.log('登录成功', form);
         router.push('/dashboard');
         ElMessage.success("登录成功!");
+      } else {
+        ElMessage.error("账号或密码错误,请重新输入!");
       }
     }
   })
@@ -90,14 +163,14 @@ const toForgot = () => {
 }
 
 .login-left {
-  flex: 7;
+  flex: 6;
   background-image: url('/images/login_bg.jpg'); /* 替换为你的图片路径 */
   background-size: cover;
   background-position: center;
 }
 
 .login-right {
-  flex: 3;
+  flex: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +179,7 @@ const toForgot = () => {
 
 .login-form-wrapper {
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
   padding: 40px 20px;
 }
 
@@ -159,4 +232,5 @@ const toForgot = () => {
 .login-links a:hover {
   text-decoration: underline;
 }
+
 </style>

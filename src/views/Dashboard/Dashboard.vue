@@ -10,10 +10,10 @@
         <el-icon class="full-icon" @click="toggleFullScreen">
           <FullScreen/>
         </el-icon>
-        <el-avatar :size="35" :src="DEFAULT_USER_AVATAR" @click="goProfile"/>
+        <el-avatar :size="35" :src="UserStateStore.getCurrentUser?.value?.baseInfo.avatar" @click="goProfile"/>
         <el-dropdown>
           <span class="el-dropdown-link">
-            {{ DEFAULT_USER_NAME }}
+            {{ UserStateStore.getCurrentUser?.value?.baseInfo.nickname }}
             <el-icon class="el-icon--right">
               <arrow-down/>
             </el-icon>
@@ -61,9 +61,12 @@
             </el-icon>
             <span>首页</span>
           </el-menu-item>
-            <el-menu-item index="/dashboard/dataBigScreen" @click="menuActiveStore.setCurrentlyMenu('/dashboard/dataBigScreen')">
-              <el-icon><DataBoard /></el-icon>
-              <span>数据大屏</span>
+          <el-menu-item index="/dashboard/dataBigScreen"
+                        @click="menuActiveStore.setCurrentlyMenu('/dashboard/dataBigScreen')">
+            <el-icon>
+              <DataBoard/>
+            </el-icon>
+            <span>数据大屏</span>
           </el-menu-item>
           <el-sub-menu index="/management">
             <template #title>
@@ -103,21 +106,29 @@
           </el-sub-menu>
           <el-sub-menu index="/logAudit">
             <template #title>
-              <el-icon><List /></el-icon>
+              <el-icon>
+                <List/>
+              </el-icon>
               <span>日志审计</span>
             </template>
             <el-menu-item-group title="日志审计">
               <el-menu-item index="/dashboard/errorLogAudit">
-                <el-icon><CloseBold /></el-icon>
+                <el-icon>
+                  <CloseBold/>
+                </el-icon>
                 <span>错误日志</span>
               </el-menu-item>
               <el-menu-item index="/dashboard/actionLogAudit"
                             @click="menuActiveStore.setCurrentlyMenu('/dashboard/userManagement')">
-                <el-icon><Link /></el-icon>
+                <el-icon>
+                  <Link/>
+                </el-icon>
                 <span>操作日志</span>
               </el-menu-item>
               <el-menu-item index="/dashboard/loginLogAudit">
-                <el-icon><Position /></el-icon>
+                <el-icon>
+                  <Position/>
+                </el-icon>
                 <span>登录日志</span>
               </el-menu-item>
             </el-menu-item-group>
@@ -125,17 +136,23 @@
           </el-sub-menu>
           <el-sub-menu index="/notice">
             <template #title>
-              <el-icon><Notification /></el-icon>
+              <el-icon>
+                <Notification/>
+              </el-icon>
               <span>通知管理</span>
             </template>
             <el-menu-item-group title="通知管理">
               <el-menu-item index="/dashboard/publishNotice">
-                <el-icon><Plus /></el-icon>
+                <el-icon>
+                  <Plus/>
+                </el-icon>
                 <span>发布通知</span>
               </el-menu-item>
               <el-menu-item index="/dashboard/noticeList"
                             @click="menuActiveStore.setCurrentlyMenu('/dashboard/noticeList')">
-                <el-icon><List /></el-icon>
+                <el-icon>
+                  <List/>
+                </el-icon>
                 <span>通知列表</span>
               </el-menu-item>
             </el-menu-item-group>
@@ -189,10 +206,12 @@ import {
   Setting,
   User
 } from "@element-plus/icons-vue";
-import {DEFAULT_USER_AVATAR, DEFAULT_USER_NAME, PROJECT_NAME} from "../../config";
+import {PROJECT_NAME} from "../../config";
 import {useRestPasswordStore} from "../../stores/RestPasswordDlalogStore.ts";
 import {useMenuActiveStore} from "../../stores/MenuActiveStore.ts";
+import {useUserStateStore} from "../../stores/userState.ts";
 
+const UserStateStore = useUserStateStore();
 const route = useRoute()
 const defaultActive = computed(() => route.path)
 const menuActiveStore = useMenuActiveStore();
@@ -201,7 +220,9 @@ const router = useRouter()
 
 const logout = () => {
   router.push('/login')
+  UserStateStore.restUserState();
   menuActiveStore.restCurrently();
+
 }
 
 const goHome = () => {

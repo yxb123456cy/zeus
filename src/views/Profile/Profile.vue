@@ -43,11 +43,14 @@
 import {reactive, ref} from 'vue'
 import {ElMessage} from 'element-plus'
 import type {FormInstance, FormRules} from 'element-plus';
-import {DEFAULT_USER_AVATAR} from "../../config";
+import {useUserStateStore} from "../../stores/userState.ts";
 
+const UserStateStore = useUserStateStore();
 const user = reactive({
-  avatar: DEFAULT_USER_AVATAR,
-  nickname: '管理员',
+  avatar: UserStateStore.getCurrentUser
+      .value?.baseInfo.avatar,
+  nickname: UserStateStore.getCurrentUser.value
+      ?.baseInfo.nickname,
   email: `2186256471@qq.com`
 })
 
