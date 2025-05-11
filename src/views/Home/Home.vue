@@ -1,33 +1,34 @@
 <template>
   <div class="home-container">
-    <el-row :gutter="20">
-      <!-- Chart cards -->
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div ref="chart1" class="chart"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div ref="chart2" class="chart"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div ref="chart3" class="chart"></div>
-        </el-card>
-      </el-col>
-      <el-col :span="12">
-        <el-card class="chart-card">
-          <div ref="chart4" class="chart"></div>
-        </el-card>
-      </el-col>
-    </el-row>
-
+<!--    <el-row :gutter="20">-->
+<!--      &lt;!&ndash; Chart cards &ndash;&gt;-->
+<!--      <el-col :span="12">-->
+<!--        <el-card class="chart-card">-->
+<!--          <div ref="chart1" class="chart"></div>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      <el-col :span="12">-->
+<!--        <el-card class="chart-card">-->
+<!--          <div ref="chart2" class="chart"></div>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      <el-col :span="12">-->
+<!--        <el-card class="chart-card">-->
+<!--          <div ref="chart3" class="chart"></div>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--      <el-col :span="12">-->
+<!--        <el-card class="chart-card">-->
+<!--          <div ref="chart4" class="chart"></div>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+    <el-card>您好<el-tag style="margin-left: 1vw" size="large" type="success">{{userStateStore.currentUser?.baseInfo.nickname}}</el-tag>
+      欢迎使用Zeus后台管理系统&nbsp;祝您生活愉快
+    </el-card>
     <!-- Tech stack description -->
     <el-card class="tech-card">
-      <h3>技术栈说明</h3>
-
+      <ProjectDescriptions/>
     </el-card>
   </div>
 </template>
@@ -35,12 +36,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
+import {useUserStateStore} from "../../stores/userState.ts";
 
 const chart1 = ref<HTMLDivElement | null>(null)
 const chart2 = ref<HTMLDivElement | null>(null)
 const chart3 = ref<HTMLDivElement | null>(null)
 const chart4 = ref<HTMLDivElement | null>(null)
-
+const  userStateStore = useUserStateStore();
 // 初始化图表方法
 function initChart(dom: HTMLDivElement | null, options: any) {
   if (!dom) return
@@ -125,7 +127,7 @@ onMounted(() => {
   height: 300px;
 }
 .tech-card {
-  margin-top: 20px;
+  margin-top: 1vh;
 }
 .tech-card h3 {
   margin-bottom: 10px;
