@@ -67,7 +67,7 @@ const handleLogin = () => {
   })
 }
 onMounted(() => {
-  console.log(elk);
+  console.log("this is Login.vue");
 })
 
 /**

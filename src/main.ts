@@ -5,15 +5,13 @@ import App from './App.vue'
 import router from "./router";
 import pinia from "./stores";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import setupRouterGuard from "./guard/RouterGuard.r.ts";
 
 const application = createApp(App);
 //参数分别是错误对象、触发该错误的组件实例和一个指出错误来源类型信息的字符串。
-application.config.errorHandler = (err: unknown, instance: ComponentPublicInstance | null, info: string) => {
+application.config.errorHandler = (err, instance: ComponentPublicInstance | null, info: string) => {
     // 处理错误，例如：报告给一个服务
     console.log("Zeus获取Vue全局错误:")
     console.log("err:", err);
-    console.log("err.message:", err.message)
     console.log("instance:", instance);
     console.log("info:", info);
     //将错误数据上报;
