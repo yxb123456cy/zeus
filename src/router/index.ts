@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import type {RouteRecordRaw} from 'vue-router'
 import {useUserStateStore} from "../stores/userState.ts";
+import type {Employee} from "../types/company.ts";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -101,7 +102,20 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('../views/swagger/SwaggerAPIView.vue'),
                 meta: {title: '接口文档'},
             },
+            {
+                path: '/dashboard/403',
+                name: '403',
+                component: () => import('../views/403/Forbidden.vue'),
+                meta: {title: '403-forbidden'},
+            },
+
         ]
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: '404',
+        component: () => import('../views/404/NotFound.vue'),
+        meta: {title: '404-NotFound'},
     },
     {
         path: '/login',
@@ -140,14 +154,31 @@ router.beforeEach(async (to, _) => {
      * Pinia中的组合式API可以在函数中使用?
      */
     const userStateStore = useUserStateStore();
+    const checkPermission = (r: string, e: Employee | null): boolean | undefined => {
+        return e?.baseInfo.roles[0]
+            .permissions.some(p => p.path === r);
+    }
     if (
         // 检查用户是否已登录
         userStateStore.isLogin === false &&
         // ❗️ 避免无限重定向
         to.name !== 'Login' && to.name !== 'Register' && to.name !== 'Forgot-password'
+        && to.name!=='404'
     ) {
         // 将用户重定向到登录页面
         return {name: 'Login'}
     }
+    //登录且Path为系统后台相关;
+    if (
+        // 检查用户是否已登录
+        userStateStore.isLogin &&
+        // ❗️ 避免无限重定向
+        to.name !== 'Login' && to.name !== 'Register' && to.name !== 'Forgot-password'
+        && to.name !== '403'&& to.name!=='404'
+    ) {
+        const permission = checkPermission(to.path, userStateStore.getCurrentUser.value);
+        if (permission === undefined || !permission) return {name: '403'};
+    }
+
 })
 export default router

@@ -3,7 +3,9 @@
 </script>
 
 <template>
-
+<div>
+  <el-button>拒绝访问</el-button>
+</div>
 </template>
 
 <style scoped>
