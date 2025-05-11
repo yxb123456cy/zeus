@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import type {RouteRecordRaw} from 'vue-router'
+import {useUserStateStore} from "../stores/userState.ts";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -127,10 +128,26 @@ const router = createRouter({
     routes,
     scrollBehavior() {
         // 始终滚动到顶部
-        return { top: 0 }
+        return {top: 0}
     },
 })
 
-
-
+router.onError(err => {
+    console.error('Vue-Router error:', err)
+})
+router.beforeEach(async (to, _) => {
+    /**
+     * Pinia中的组合式API可以在函数中使用?
+     */
+    const userStateStore = useUserStateStore();
+    if (
+        // 检查用户是否已登录
+        userStateStore.isLogin === false &&
+        // ❗️ 避免无限重定向
+        to.name !== 'Login' && to.name !== 'Register' && to.name !== 'Forgot-password'
+    ) {
+        // 将用户重定向到登录页面
+        return {name: 'Login'}
+    }
+})
 export default router
