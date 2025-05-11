@@ -44,5 +44,11 @@ declare module 'vue' {
     RestPasswordDIalog: typeof import('./components/RestPasswordDIalog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ZsButton: typeof import('./components/ZS/ZsButton.vue')['default']
+    ZsDialog: typeof import('./components/ZS/ZsDialog.vue')['default']
+    ZsDrawer: typeof import('./components/ZS/ZsDrawer.vue')['default']
+    ZsForm: typeof import('./components/ZS/ZsForm.vue')['default']
+    ZsSearch: typeof import('./components/ZS/ZsSearch.vue')['default']
+    ZsTable: typeof import('./components/ZS/ZsTable.vue')['default']
   }
 }

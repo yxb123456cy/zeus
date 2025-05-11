@@ -104,6 +104,12 @@ const routes: RouteRecordRaw[] = [
                 meta: {title: '接口文档'},
             },
             {
+                path: '/dashboard/iframe/:id',
+                name: 'MyIframe',
+                component: () => import('../views/Iframe/MyIframe.vue'),
+                meta: {title: '内嵌网页'},
+            },
+            {
                 path: '/dashboard/403',
                 name: '403',
                 component: () => import('../views/403/Forbidden.vue'),

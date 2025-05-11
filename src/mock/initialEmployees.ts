@@ -17,6 +17,9 @@ export const permissions: Permission[] = [
     {id: "12", name: "访问个人中心", path: "/dashboard/profile"},
     {id: "13", name: "访问系统设置", path: "/dashboard/settings"},
     {id: "14", name: "访问Zeus项目接口文档", path: "/dashboard/swagger-api-view"},
+    {id: "15", name: "访问DockerUi内嵌网页", path: "/dashboard/iframe/docker-dashboard.pages.dev"},
+    {id: "16", name: "访问问卷喵内嵌网页", path: "/dashboard/iframe/qy-questionnaire.vercel.app"},
+    {id: "17", name: "访问轻叶壁纸内嵌网页", path: "/dashboard/iframe/qy-wallpaper.vercel.app"},
 ]
 const getDepartmentLeaderRolePermissions = () => {
     return permissions.filter(permission => permission.id !== '4' && permission.id !== '5' && permission.id !== '6')

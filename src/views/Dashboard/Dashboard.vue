@@ -71,7 +71,7 @@
           <el-sub-menu index="/management">
             <template #title>
               <el-icon>
-                <location/>
+                <House/>
               </el-icon>
               <span>公司管理</span>
             </template>
@@ -173,6 +173,27 @@
             </el-icon>
             <span>接口文档</span>
           </el-menu-item>
+          <el-sub-menu index="/myiframe">
+            <template #title>
+              <el-icon>
+                <link-cloud-sucess theme="outline" size="24" fill="#333"/>
+              </el-icon>
+              <span>内嵌网页</span>
+            </template>
+            <el-menu-item index="/dashboard/iframe/docker-dashboard.pages.dev"
+            >
+              <span>docker-UI</span>
+            </el-menu-item>
+            <el-menu-item index="/dashboard/iframe/qy-questionnaire.vercel.app"
+            >
+              <span>问卷喵</span>
+            </el-menu-item>
+            <el-menu-item index="/dashboard/iframe/qy-wallpaper.vercel.app"
+            >
+              <span>轻叶壁纸汇</span>
+            </el-menu-item>
+          </el-sub-menu>
+
           <el-menu-item index="/dashboard/settings" @click="menuActiveStore.setCurrentlyMenu('/dashboard/settings')">
             <el-icon>
               <Setting/>
@@ -193,6 +214,7 @@
 </template>
 
 <script setup lang="ts">
+import {LinkCloudSucess} from "@icon-park/vue-next";
 import {useRoute, useRouter} from 'vue-router'
 import {
   ArrowDown,
@@ -202,8 +224,8 @@ import {
   FullScreen,
   House,
   List,
-  Location, Notification, Plus, Position,
-  Setting,
+  Notification, Plus, Position,
+  Setting, SwitchButton,
   User
 } from "@element-plus/icons-vue";
 import {PROJECT_NAME} from "../../config";

@@ -5,6 +5,9 @@ import App from './App.vue'
 import router from "./router";
 import pinia from "./stores";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+// 引入Icon-park;
+import '@icon-park/vue-next/styles/index.css';
+
 
 const application = createApp(App);
 application.use(pinia);
