@@ -125,7 +125,7 @@ const loginLogs = ref<LoginLog[]>([...mockLoginLogs])
 const currentPage = ref(1);
 const pageSize = ref(10);
 
-const clickDelete = (row?: loginLogs) => {
+const clickDelete = (row?: LoginLog) => {
   console.log(row);
   ElMessage.error("不能进行删除!");
 }
