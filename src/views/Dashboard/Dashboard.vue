@@ -61,12 +61,100 @@
             </el-icon>
             <span>首页</span>
           </el-menu-item>
-          <el-menu-item index="/dashboard/userManagement"
-                        @click="menuActiveStore.setCurrentlyMenu('/dashboard/userManagement')">
+            <el-menu-item index="/dashboard/dataBigScreen" @click="menuActiveStore.setCurrentlyMenu('/dashboard/dataBigScreen')">
+              <el-icon><DataBoard /></el-icon>
+              <span>数据大屏</span>
+          </el-menu-item>
+          <el-sub-menu index="/management">
+            <template #title>
+              <el-icon>
+                <location/>
+              </el-icon>
+              <span>公司管理</span>
+            </template>
+            <el-menu-item-group title="公司管理">
+              <el-menu-item index="/dashboard/departmentManagement">
+                <el-icon>
+                  <User/>
+                </el-icon>
+                <span>部门管理</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/employeeManagement"
+                            @click="menuActiveStore.setCurrentlyMenu('/dashboard/employeeManagement')">
+                <el-icon>
+                  <User/>
+                </el-icon>
+                <span>员工管理</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/roleManagement">
+                <el-icon>
+                  <User/>
+                </el-icon>
+                <span>角色管理</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/permissionManagement">
+                <el-icon>
+                  <User/>
+                </el-icon>
+                <span>权限管理</span>
+              </el-menu-item>
+            </el-menu-item-group>
+
+          </el-sub-menu>
+          <el-sub-menu index="/logAudit">
+            <template #title>
+              <el-icon><List /></el-icon>
+              <span>日志审计</span>
+            </template>
+            <el-menu-item-group title="日志审计">
+              <el-menu-item index="/dashboard/errorLogAudit">
+                <el-icon><CloseBold /></el-icon>
+                <span>错误日志</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/actionLogAudit"
+                            @click="menuActiveStore.setCurrentlyMenu('/dashboard/userManagement')">
+                <el-icon><Link /></el-icon>
+                <span>操作日志</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/loginLogAudit">
+                <el-icon><Position /></el-icon>
+                <span>登录日志</span>
+              </el-menu-item>
+            </el-menu-item-group>
+
+          </el-sub-menu>
+          <el-sub-menu index="/notice">
+            <template #title>
+              <el-icon><Notification /></el-icon>
+              <span>通知管理</span>
+            </template>
+            <el-menu-item-group title="通知管理">
+              <el-menu-item index="/dashboard/publishNotice">
+                <el-icon><Plus /></el-icon>
+                <span>发布通知</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/noticeList"
+                            @click="menuActiveStore.setCurrentlyMenu('/dashboard/noticeList')">
+                <el-icon><List /></el-icon>
+                <span>通知列表</span>
+              </el-menu-item>
+            </el-menu-item-group>
+
+          </el-sub-menu>
+
+
+          <el-menu-item index="/dashboard/profile" @click="menuActiveStore.setCurrentlyMenu('/dashboard/profile')">
             <el-icon>
-              <User/>
+              <Setting/>
             </el-icon>
-            <span>用户管理</span>
+            <span>个人中心</span>
+          </el-menu-item>
+          <el-menu-item index="/dashboard/swagger-api-view"
+                        @click="menuActiveStore.setCurrentlyMenu('/dashboard/swagger-api-view')">
+            <el-icon>
+              <Document/>
+            </el-icon>
+            <span>接口文档</span>
           </el-menu-item>
           <el-menu-item index="/dashboard/settings" @click="menuActiveStore.setCurrentlyMenu('/dashboard/settings')">
             <el-icon>
@@ -79,7 +167,8 @@
 
       <!-- 右侧内容 -->
       <el-main class="dashboard-main">
-        <router-view/>
+        <!--       todo 后续添加路由过渡效果-->
+        <RouterView/>
         <RestPasswordDIalog/>
       </el-main>
     </el-container>
@@ -88,7 +177,18 @@
 
 <script setup lang="ts">
 import {useRoute, useRouter} from 'vue-router'
-import {ArrowDown, Edit, FullScreen, House, Setting, User} from "@element-plus/icons-vue";
+import {
+  ArrowDown,
+  CloseBold, DataBoard,
+  Document,
+  Edit,
+  FullScreen,
+  House,
+  List,
+  Location, Notification, Plus, Position,
+  Setting,
+  User
+} from "@element-plus/icons-vue";
 import {DEFAULT_USER_AVATAR, DEFAULT_USER_NAME, PROJECT_NAME} from "../../config";
 import {useRestPasswordStore} from "../../stores/RestPasswordDlalogStore.ts";
 import {useMenuActiveStore} from "../../stores/MenuActiveStore.ts";

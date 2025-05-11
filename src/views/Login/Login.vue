@@ -9,7 +9,7 @@
         <el-card class="login-card">
           <div class="logo-wrapper">
             <img src="/vite.svg" alt="Logo" class="logo"/>
-            <h1 class="company-name">{{PROJECT_NAME}}</h1>
+            <h1 class="company-name">{{ PROJECT_NAME }}</h1>
           </div>
 
           <h2 class="login-title">欢迎登录</h2>
@@ -37,10 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from 'vue'
+import {onMounted, reactive, ref} from 'vue'
 import {ElMessage, type FormInstance, type FormRules} from 'element-plus'
 import {useRouter} from 'vue-router'
 import {PROJECT_NAME} from "../../config";
+
 const router = useRouter()
 const formRef = ref<FormInstance>()
 const form = reactive({
@@ -65,6 +66,9 @@ const handleLogin = () => {
     }
   })
 }
+onMounted(() => {
+  console.log(elk);
+})
 
 /**
  * 跳转至注册页面;
