@@ -15,7 +15,8 @@ export const permissions: Permission[] = [
     {id: '10', name: "可以发布通知", path: "/dashboard/publishNotice"},
     {id: '11', name: "可以查看通知列表", path: "/dashboard/noticeList"},
     {id: "12", name: "访问个人中心", path: "/dashboard/profile"},
-    {id: "13", name: "访问系统设置", path: "/dashboard/Settings"},
+    {id: "13", name: "访问系统设置", path: "/dashboard/settings"},
+    {id: "14", name: "访问Zeus项目接口文档", path: "/dashboard/swagger-api-view"},
 ]
 const getDepartmentLeaderRolePermissions = () => {
     return permissions.filter(permission => permission.id !== '4' && permission.id !== '5' && permission.id !== '6')

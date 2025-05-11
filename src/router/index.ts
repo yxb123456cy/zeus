@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import type {RouteRecordRaw} from 'vue-router'
 import {useUserStateStore} from "../stores/userState.ts";
 import type {Employee} from "../types/company.ts";
+import setPageTitle from "../utils/DocumentTitleUtil.ts";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -18,7 +19,7 @@ const routes: RouteRecordRaw[] = [
                 path: '/dashboard/home',
                 name: 'Home',
                 component: () => import('../views/Home/Home.vue'),
-                meta: {title: '系统首页'},
+                meta: {title: 'Zeus系统首页'},
 
             },
             {
@@ -163,7 +164,7 @@ router.beforeEach(async (to, _) => {
         userStateStore.isLogin === false &&
         // ❗️ 避免无限重定向
         to.name !== 'Login' && to.name !== 'Register' && to.name !== 'Forgot-password'
-        && to.name!=='404'
+        && to.name !== '404'
     ) {
         // 将用户重定向到登录页面
         return {name: 'Login'}
@@ -174,11 +175,17 @@ router.beforeEach(async (to, _) => {
         userStateStore.isLogin &&
         // ❗️ 避免无限重定向
         to.name !== 'Login' && to.name !== 'Register' && to.name !== 'Forgot-password'
-        && to.name !== '403'&& to.name!=='404'
+        && to.name !== '403' && to.name !== '404'
     ) {
         const permission = checkPermission(to.path, userStateStore.getCurrentUser.value);
         if (permission === undefined || !permission) return {name: '403'};
     }
 
+})
+/**
+ * 全局路由后置钩子;
+ */
+router.afterEach((to, _) => {
+    setPageTitle(to.fullPath);
 })
 export default router
