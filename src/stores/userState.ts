@@ -20,4 +20,6 @@ export const useUserStateStore = defineStore('UserStateStore', () => {
 
     return {isLogin, currentUser, getCurrentUser, setLoginState,restUserState}
 
+},{
+    persist:true,
 })

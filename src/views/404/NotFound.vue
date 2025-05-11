@@ -1,7 +1,11 @@
 <template>
   <div class="not-found-container">
+    <div>
+    </div>
     <div class="content">
-      <h1 class="code">404</h1>
+      <div>
+        <img src="/images/404.png" alt="404.png" style="width: 250px" >
+      </div>
       <h2 class="message">页面不存在</h2>
       <p class="description">
         抱歉，您访问的页面不存在或已被删除。
@@ -32,7 +36,7 @@ const goHome = () => {
 
   .content {
     max-width: 460px;
-    padding: 20px;
+    padding: 10px;
   }
 
   .code {
@@ -46,6 +50,7 @@ const goHome = () => {
   .message {
     font-size: 24px;
     margin-bottom: 12px;
+    margin-top: -25px;
   }
 
   .description {

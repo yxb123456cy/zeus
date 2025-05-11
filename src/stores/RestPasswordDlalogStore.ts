@@ -6,4 +6,6 @@ export const useRestPasswordStore = defineStore('rest_password_dialog', () => {
         show.value = value;
     }
     return {show, getShow, setShow}
+},{
+    persist:true,
 })

@@ -23,6 +23,8 @@ export const useMenuActiveStore = defineStore('menu_active', () => {
     }
 
     return {currently, getCurrentlyMenu, setCurrentlyMenu, logCurrently,restCurrently}
+},{
+    persist:true,
 })
 
 
