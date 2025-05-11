@@ -23,11 +23,11 @@
 <!--        </el-card>-->
 <!--      </el-col>-->
 <!--    </el-row>-->
-    <el-card>您好<el-tag style="margin-left: 1vw" size="large" type="success">{{userStateStore.currentUser?.baseInfo.nickname}}</el-tag>
+    <el-card style="background-color: rgba(255,255,255,0.65)">您好<el-tag style="margin-left: 1vw" size="large" type="success">{{userStateStore.currentUser?.baseInfo.nickname}}</el-tag>
       欢迎使用Zeus后台管理系统&nbsp;祝您生活愉快
     </el-card>
     <!-- Tech stack description -->
-    <el-card class="tech-card">
+    <el-card class="tech-card" style="background-color: rgba(255,255,255,0.65)">
       <ProjectDescriptions/>
     </el-card>
   </div>

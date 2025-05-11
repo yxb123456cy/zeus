@@ -160,6 +160,32 @@
           </el-sub-menu>
 
 
+          <el-sub-menu index="/tool">
+            <template #title>
+              <el-icon>
+                <Tools/>
+              </el-icon>
+              <span>工具封装</span>
+            </template>
+            <el-menu-item-group title="前端工具">
+              <el-menu-item index="/dashboard/tool/netUtil">
+                <el-icon>
+                  <Share/>
+                </el-icon>
+                <span>网络请求工具</span>
+              </el-menu-item>
+              <el-menu-item index="/dashboard/tool/cacheUtil"
+              >
+                <el-icon>
+                  <FolderChecked/>
+                </el-icon>
+                <span>前端缓存工具</span>
+              </el-menu-item>
+            </el-menu-item-group>
+
+          </el-sub-menu>
+
+
           <el-menu-item index="/dashboard/profile" @click="menuActiveStore.setCurrentlyMenu('/dashboard/profile')">
             <el-icon>
               <Setting/>
@@ -182,14 +208,23 @@
             </template>
             <el-menu-item index="/dashboard/iframe/docker-dashboard.pages.dev"
             >
-              <span>docker-UI</span>
+              <el-icon>
+                <img alt="docker-logo-blue.png" src="/images/docker-logo-blue.png" style="width: 80px">
+              </el-icon>
+              <span style="z-index: 999;font-weight: bolder">docker-UI</span>
             </el-menu-item>
             <el-menu-item index="/dashboard/iframe/qy-questionnaire.vercel.app"
             >
+              <el-icon>
+                <img src="/images/问卷喵_logo.png" style="width: 35px" alt="问卷喵_logo.png">
+              </el-icon>
               <span>问卷喵</span>
             </el-menu-item>
             <el-menu-item index="/dashboard/iframe/qy-wallpaper.vercel.app"
             >
+              <el-icon>
+                <img src="/vite.svg" alt="vite.svg">
+              </el-icon>
               <span>轻叶壁纸汇</span>
             </el-menu-item>
           </el-sub-menu>
@@ -220,12 +255,12 @@ import {
   ArrowDown,
   CloseBold, DataBoard,
   Document,
-  Edit,
+  Edit, FolderChecked,
   FullScreen,
   House,
   List,
   Notification, Plus, Position,
-  Setting, SwitchButton,
+  Setting, Share, SwitchButton, Tools,
   User
 } from "@element-plus/icons-vue";
 import {PROJECT_NAME} from "../../config";
@@ -327,9 +362,11 @@ const toggleFullScreen = () => {
 
 .dashboard-main {
   flex: 1;
-  background: #f5f7fa;
   padding: 15px;
   overflow-y: auto;
+  background-size: cover;
+  background: url("/system/星野爱.png") no-repeat fixed center;
+  opacity: 0.95;
 }
 
 /* 自定义菜单样式 */

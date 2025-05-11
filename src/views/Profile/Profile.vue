@@ -1,6 +1,6 @@
 <template>
   <div class="profile-container">
-    <el-card>
+    <el-card style="background-color: rgba(255,255,255,0.8)">
       <template #header>
         <div class="card-header">
           <span>个人中心</span>

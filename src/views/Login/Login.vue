@@ -65,7 +65,10 @@ import {useRouter} from 'vue-router'
 import {PROJECT_NAME} from "../../config";
 import {initialEmployees} from "../../mock/initialEmployees.ts";
 import {useUserStateStore} from "../../stores/userState.ts";
-
+const form = reactive({
+  username: 'admin',
+  password: 'admin',
+})
 const UserStateStore = useUserStateStore();
 const user_avatar = ref<string>("https://qy-red-book.oss-cn-guangzhou.aliyuncs.com/resources/avatar/67700cbb11c98ab3f5837115.jpg");
 const user_name = ref<string>("admin");
@@ -110,10 +113,7 @@ const options = [
 ]
 const router = useRouter()
 const formRef = ref<FormInstance>()
-const form = reactive({
-  username: 'admin',
-  password: 'admin',
-})
+
 
 const rules: FormRules = {
   username: [{required: true, message: '请输入用户名', trigger: 'blur'}],

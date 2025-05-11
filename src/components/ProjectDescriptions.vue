@@ -1,5 +1,5 @@
 <template>
-  <el-descriptions title="项目信息" :column="2" border>
+  <el-descriptions  title="项目信息" :column="2" border>
     <el-descriptions-item label="项目名称">{{ projectInfo.name }}</el-descriptions-item>
     <el-descriptions-item label="版本">{{ projectInfo.version }}</el-descriptions-item>
     <el-descriptions-item label="类型">{{ projectInfo.type }}</el-descriptions-item>
@@ -10,9 +10,9 @@
     <el-descriptions-item label="开发命令">{{ projectInfo.scripts.dev }}</el-descriptions-item>
   </el-descriptions>
 
-  <el-tabs type="border-card" class="mt-4">
+  <el-tabs type="border-card" class="mt-4" >
     <el-tab-pane label="项目依赖 dependencies">
-      <el-table :data="dependenciesList" border size="small">
+      <el-table :data="dependenciesList" border size="small" >
         <el-table-column prop="name" label="包名" />
         <el-table-column prop="version" label="版本号" />
       </el-table>
@@ -30,7 +30,7 @@
 const projectInfo = {
   name: "zeus-vue3-view",
   private: true,
-  version: "1.0",
+  version: "0.0.0",
   type: "module",
   scripts: {
     dev: "vite",
