@@ -168,10 +168,12 @@ const paginatedData = computed(() => {
 .管理员 {
   color: red;
 }
-.部门主管{
+
+.部门主管 {
   color: #409eff;
 }
-.普通员工{
+
+.普通员工 {
   color: green;
 }
 </style>

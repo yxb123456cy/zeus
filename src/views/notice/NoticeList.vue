@@ -4,10 +4,10 @@
       <el-button type="primary" @click="openDialog()">发布通知</el-button>
 
       <el-card style="margin-top: 2vh" header="通知列表">
-        <el-table :data="paginatedData"  border  class="my-4" stripe  highlight-current-row>
-          <el-table-column prop="title"  width="240">
+        <el-table :data="paginatedData" border class="my-4" stripe highlight-current-row>
+          <el-table-column prop="title" width="240">
             <template #header>
-            <span style="font-weight: bolder;font-size: 15px;color: black">标题</span>
+              <span style="font-weight: bolder;font-size: 15px;color: black">标题</span>
             </template>
             <template #default="{ row }">
               <el-popover
@@ -22,37 +22,37 @@
             </template>
           </el-table-column>
 
-          <el-table-column prop="publisher" width="250" >
+          <el-table-column prop="publisher" width="250">
             <template #header>
               <span style="font-weight: bolder;font-size: 15px;color: black">发布人</span>
             </template>
             <template #default="{ row }">
-             <el-tag>{{row.publisher}}</el-tag>
+              <el-tag>{{ row.publisher }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="status"  width="120" >
+          <el-table-column prop="status" width="120">
             <template #header>
               <span style="font-weight: bolder;font-size: 15px;color: black">状态</span>
             </template>
             <template #default="{ row }">
-              <el-tag :type="row.status==='草稿'?'info': 'success' ">{{row.status}}</el-tag>
+              <el-tag :type="row.status==='草稿'?'info': 'success' ">{{ row.status }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="readState"  width="100">
+          <el-table-column prop="readState" width="100">
             <template #header>
               <span style="font-weight: bolder;font-size: 15px;color: black">阅读状态</span>
             </template>
             <template #default="{ row }">
-              <el-tag :type="row.readState==='已读'?'success': 'danger' ">{{row.readState}}</el-tag>
+              <el-tag :type="row.readState==='已读'?'success': 'danger' ">{{ row.readState }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="publishTime" label="" >
+          <el-table-column prop="publishTime" label="">
             <template #header>
               <span style="font-weight: bolder;font-size: 15px;color: black">发布时间</span>
             </template>
           </el-table-column>
 
-          <el-table-column  width="180">
+          <el-table-column width="180">
             <template #header>
               <span style="font-weight: bolder;font-size: 15px;color: black">操作</span>
             </template>
@@ -72,15 +72,15 @@
         />
       </el-card>
 
-      <NoticeDialog v-model:visible="dialogVisible" :notice="editingNotice" @save="onSave" />
+      <NoticeDialog v-model:visible="dialogVisible" :notice="editingNotice" @save="onSave"/>
     </el-card>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import {ref, computed} from 'vue'
+import {ElMessage, ElMessageBox} from 'element-plus'
 import type {Notice} from "../../types/notice.ts";
 import {mockNotices} from "../../mock/notice.ts";
 import NoticeDialog from "./NoticeDialog.vue";
@@ -104,7 +104,7 @@ const paginatedData = computed(() => {
  * @param notice
  */
 const openDialog = (notice?: Notice) => {
-  editingNotice.value = notice ? { ...notice } : null
+  editingNotice.value = notice ? {...notice} : null
   dialogVisible.value = true
 }
 /**
@@ -144,6 +144,7 @@ const onDelete = (id: number) => {
   white-space: nowrap;
   vertical-align: middle;
 }
+
 .el-table .el-table__cell {
   box-sizing: border-box;
   min-width: 0;
